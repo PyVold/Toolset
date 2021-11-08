@@ -1,0 +1,37 @@
+{% set indexing = 100 %}
+{%- for set in sets -%}
+{{ set['set'] }}
+{% for router in set["routers"] %}
+{%- if router["side"] == 'A' -%}
+--------{{ router["name"] }}--------
+configure private
+router twamp-light reflector
+  admin-state enable
+  {%- if router["twamp_description"] %}
+  description "{{ router["twamp_description"] }}" 
+  {%- else %}
+  description "Twamp_latency_Reflector"
+  {% endif -%}
+  udp-port 64365
+  {%- for prefix in router["prefixes"] %}
+  prefix {{ prefix["source"] }}
+    description "{{ prefix["description"] }}"
+    exit
+{% endfor -%}
+commit
+{% else -%}
+--------{{ router["name"] }}--------
+configure private
+{% for session in router["sessions"] -%}
+session {{ session["name"] }}
+  description {{ session["description"] }}
+  ip
+    destination {{ session["destination"] }}
+    source {{ session["source"] }}
+    twamp-light
+    test-id: {{ indexing }}
+{% set indexing = indexing + 1 %}
+{%- endfor -%}
+commit
+{% endif %}
+{% endfor %}{% endfor %}

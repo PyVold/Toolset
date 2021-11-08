@@ -1,0 +1,162 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://bcgit.bc/tne/service_templates/-/tree/master/pcep/template.jschema",
+    "type": "object",
+    "title": "PCEP jschema",
+    "default": {},
+    "examples": [
+        {
+            "peers": [
+                {
+                    "name": "VSR/BRU",
+                    "ip": "213.137.158.244",
+                    "pref": 50
+                }
+            ],
+            "routers": [
+                {
+                    "name": "prs-th2-r301",
+                    "ip": "213.137.158.57"
+                }
+            ]
+        }
+    ],
+    "required": [
+        "peers",
+        "routers"
+    ],
+    "properties": {
+        "peers": {
+            "$id": "#/properties/peers",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "name": "VSR/BRU",
+                        "ip": "213.137.158.244",
+                        "pref": 50
+                    }
+                ]
+            ],
+            "type": "array",
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/peers/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/peers/items/anyOf/0",
+                        "default": {},
+                        "examples": [
+                            {
+                                "name": "VSR/BRU",
+                                "ip": "213.137.158.244",
+                                "pref": 50
+                            }
+                        ],
+                        "required": [
+                            "name",
+                            "ip"
+                        ],
+                        "title": "The first anyOf schema",
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "$id": "#/properties/peers/items/anyOf/0/properties/name",
+                                "default": "VSR/BRU",
+                                "examples": [
+                                    "VSR/BRU"
+                                ],
+                                "readOnly": true,
+                                "title": "the name schema",
+                                "type": "string"
+                            },
+                            "ip": {
+                                "$id": "#/properties/peers/items/anyOf/0/properties/ip",
+                                "default": "213.137.158.244",
+                                "examples": [
+                                    "213.137.158.244"
+                                ],
+                                "title": "The ip schema",
+                                "format": "ipv4",
+                                "readOnly": true,
+                                "type": "string"
+                            },
+                            "pref": {
+                                "$id": "#/properties/peers/items/anyOf/0/properties/pref",
+                                "default": 0,
+                                "maximum": 100,
+                                "examples": [
+                                    50
+                                ],
+                                "title": "The pref schema",
+                                "type": "integer"
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "routers": {
+            "$id": "#/properties/routers",
+            "type": "array",
+            "title": "The routers schema",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "name": "prs-th2-r301",
+                        "ip": "213.137.158.57"
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/routers/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/routers/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "default": {},
+                        "examples": [
+                            {
+                                "name": "prs-th2-r301",
+                                "ip": "213.137.158.57"
+                            }
+                        ],
+                        "required": [
+                            "name",
+                            "ip"
+                        ],
+                        "properties": {
+                            "name": {
+                                "$id": "#/properties/routers/items/anyOf/0/properties/name",
+                                "default": "",
+                                "examples": [
+                                    "prs-th2-r301"
+                                ],
+                                "title": "The name schema",
+                                "pattern": ".+-r3[0-9][0-9]$",
+                                "type": "string"
+                            },
+                            "ip": {
+                                "$id": "#/properties/routers/items/anyOf/0/properties/ip",
+                                "default": "",
+                                "format": "ipv4",
+                                "examples": [
+                                    "213.137.158.57"
+                                ],
+                                "title": "",
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        }
+    },
+    "additionalProperties": true
+}
+

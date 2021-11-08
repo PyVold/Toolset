@@ -1,0 +1,118 @@
+<head>
+  <title>PyVold Render tool</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .topnav {
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    .topnav a {
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    
+    .topnav a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="{{url_for('static', filename='js/codemirror.js')}}"></script>
+    <script src="{{url_for('static', filename='js/mode/javascript.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{url_for('static', filename='js/mode/yaml.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{url_for('static', filename='js/mode/jinja2.js')}}" type="text/javascript" charset="utf-8"></script>
+    <!-- Create a simple CodeMirror instance -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/codemirror.css')}}">
+  
+    <script>
+    function selectChange(val) {
+        //Set the value of action in action attribute of form element.
+        //Submit the form
+        $('#myForm').submit();
+    }
+    </script>
+    <script>function copy() {
+      let textarea = document.getElementById("render");
+      textarea.select();
+      document.execCommand("copy");
+    }
+    </script>
+    </head>
+    <body>
+    <div class="topnav">
+      <a href="https://ipdevops.com">Home</a>
+      <a class="active" href="#tool">Pyvold Render</a>
+      <a href="https://ipdevops.com/schema">Pyvold JsonSchema</a>
+      <a href="https://Recursive-Lookup.com">Recursive-Lookup</a>
+      <a href="https://github.com/PyVold/PyVold-Render">Github</a>
+    </div>
+    <div><center><form method="post">
+    <h3><span style="color: #339966;">PyVold</span> Render tool</h3>
+    <h3>Choose one of the templates or write your own template in the box</h3>
+    <form>
+    <select name="template_names" onchange='this.form.submit()'>
+    <option value="selects">Select a template</option>
+    {% for template_name in template_names %}
+    <option value="{{template_name}}">{{template_name}}</option>
+    {% endfor %}</select>
+    </form>
+    you can add more templates by contributing to the <a href="https://github.com/PyVold/PyVold-Render" target="_blank">github repo</a></form></center></div>
+    <div><form method="post"><br />
+    <table style="border-style: dotted; margin-left: auto; margin-right: auto;">
+    <tbody>
+    <tr style="height: 85px;" align="left">
+    <td style="height: 85px; width: 40%;">
+    <h1 style="text-align: left;">Input JINJA2:</h1>
+    </td>
+    <td>
+    <td style="height: 85px; width: 40%;">
+    <h1>Input YAML:</h1>
+    </td>
+    </tr>
+    <tr style="height: 226px;" align="center">
+    <td style="height: 226px;"><textarea id="jin" style="margin: 0px; width: 90%; height: 445px;" cols="50" name="jin" rows="10">{{jin}}</textarea></td>
+    <td><center><img src="{{url_for('static', filename='images/pyvold.png')}}" width="229" height="179"></center></td>
+    <td style="height: 226px;"><textarea id="yamlt" style="margin: 0px; height: 426px; width: 90%;" cols="50" name="yamlt" rows="10">{{yamlt}}</textarea></td>
+    </tr>
+    </tbody>
+    </table>
+    <br>
+    <center><input name="submit" type="submit" value="submit" /></center>
+    </form></div>
+    <table>
+    <h1 style="text-align: center;">:: Output ::</h1>
+    <center><button onclick="copy()">Copy results</button></center>
+    <p style="text-align: center;"><textarea id="render" style="margin: 0px; width: 50%; height: 367px;" cols="50" name="render" rows="10">{{configresult}}</textarea></p> 
+  </table>
+    <h3>source code:</h3>
+    <p><sup><strong><a href="https://github.com/PyVold/PyVold-Render" target="_blank">https://github.com/PyVold/PyVold-Render</a> </strong></sup><sup><strong>| <a href="http://pyvold.com" target="_blank">www.PyVold.com</a></strong></sup></p>
+    <p style="text-align: center;">This tool is powered by <a href="https://Recursive-Lookup.com" target="_blank">Recursive-Lookup.com</a></p>
+    <script>
+      var editor = CodeMirror.fromTextArea(document.getElementById("jin"), {
+      lineNumbers: true,
+      matchBrackets: true,
+      mode: "jinja2"
+    });
+      var editor2 = CodeMirror.fromTextArea(document.getElementById("yamlt"), {
+      lineNumbers: true,
+      matchBrackets: true,
+      mode: "yaml"
+    });
+    /* editor.setSize(500, 300);
+    editor2.setSize(500, 300); */
+    </script>
+</body>
