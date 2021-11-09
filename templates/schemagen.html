@@ -46,39 +46,34 @@
         $('#myForm').submit();
     }
     </script>
-    <script>function copy() {
-      let textarea = document.getElementById("render");
-      textarea.select();
-      document.execCommand("copy");
-    }
-    </script>
     </head>
     <body>
     <div class="topnav">
       <a href="https://ipdevops.com">Home</a>
       <a href="https://ipdevops.com/render">Render</a>
-      <a class="active" href="#tool">JsonSchema</a>
-      <a href="https://ipdevops.com/schemagen">SchemaGen</a>
+      <a href="https://ipdevops.com/schema">JsonSchema</a>
+      <a class="active" href="#tool">SchemaGen</a>
       <a href="https://Recursive-Lookup.com">Recursive-Lookup</a>
       <a href="https://github.com/PyVold/Toolset">Github</a>
     </div>
     <div><center><form method="post">
-    <h3><span style="color: #339966;">PyVold</span> JsonSchema validation tool</h3>
-    <h3>Choose one of the schemas or write your own Schema in the box</h3>
+    <h3><span style="color: #339966;">PyVold</span> JsonSchema Generation tool</h3>
+    <h3>Build your Schema from Yaml inputs, select one or write your own</h3>
     <form>
     <select name="template_names" onchange='this.form.submit()'>
-    <option value="selects">Select a schema</option>
+    <option value="selects">Select a yaml file</option>
     {% for template_name in template_names %}
     <option value="{{template_name}}">{{template_name}}</option>
     {% endfor %}</select>
+    
     </form>
-    you can add more schemas by contributing to the <a href="https://github.com/PyVold/Toolset" target="_blank">github repo</a></form></center></div>
+    you can add more yaml contents by contributing to the <a href="https://github.com/PyVold/Toolset" target="_blank">github repo</a></form></center></div>
     <div><form method="post"><br />
     <table style="border-style: dotted; margin-left: auto; margin-right: auto;">
     <tbody>
     <tr style="height: 85px;" align="left">
     <td style="height: 85px; width: 45%;">
-    <h1 style="text-align: left;">Input JsonSchema:</h1>
+    <h1 style="text-align: left;">Output JsonSchema:</h1>
     </td>
     <td>
     <td style="height: 85px; width: 45%;">
@@ -86,7 +81,8 @@
     </td>
     </tr>
     <tr style="height: 226px;" align="center">
-    <td style="height: 226px;"><textarea id="jschema" style="margin: 0px; width: 90%; height: 445px;" cols="50" name="jschema" rows="10">{{jschema}}</textarea></td>
+    <td style="height: 226px;"><textarea id="jschema" style="margin: 0px; width: 90%; height: 445px;" cols="50" name="jschema" rows="10">{{jschema}}</textarea>
+    </td>
     <td><center><img src="{{url_for('static', filename='images/pyvold.png')}}" width="229" height="179"></center></td>
     <td style="height: 226px;"><textarea id="yamlt" style="margin: 0px; height: 426px; width: 90%;" cols="50" name="yamlt" rows="10">{{yamlt}}</textarea></td>
     </tr>
@@ -96,8 +92,8 @@
     <center><input name="submit" type="submit" value="submit" /></center>
     </form></div>
     <table>
-    <h1 style="text-align: center;">:: Result ::</h1>
-    <center>{{jschemaresult | safe}}</center> 
+    <h1 style="text-align: center;">:: messages ::</h1>
+    <center>{{notification | safe}}</center> 
   </table>
     <h3>source code:</h3>
     <p><sup><strong><a href="https://github.com/PyVold/Toolset" target="_blank">https://github.com/PyVold/Toolset</a> </strong></sup><sup><strong>| <a href="http://pyvold.com" target="_blank">www.PyVold.com</a></strong></sup></p>

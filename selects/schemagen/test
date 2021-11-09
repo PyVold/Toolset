@@ -1,0 +1,8 @@
+interfaces:
+  - name: Giga0/1
+    ip: 10.0.0.1
+    description: Test interface
+    status: shutdown
+  - name: Giga0/2
+    ip: 20.0.0.1
+    status: no shutdown
