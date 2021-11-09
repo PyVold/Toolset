@@ -2,6 +2,7 @@
 The toolset now includes:
   - Render tool
   - Jsonschema validation tool
+  - SchemaGen tool
   - more to come ...
 This toolset is supposed to be a helper for NetOps and DevOps engineers in their daily tasks and validations required.
 
