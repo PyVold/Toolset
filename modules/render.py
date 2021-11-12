@@ -19,9 +19,13 @@ def convert():
                                        template_names=template_names)
             file_name = request.form.get('template_names')
             template_content = template_file_read(folder, file_name)
+            try:
+                yaml_example = template_file_read(folder+"_yaml", file_name + ".yml")
+            except:
+                yaml_example = "No example available"
             logger_visits.info("visitor selected a template {}".format(file_name))
             return render_template('convert.html', configresult='', jin=template_content,
-                                   yamlt="", template_names=template_names)
+                                   yamlt= yaml_example, template_names=template_names)
         else:
             try:
                 yinput = request.form.get('yamlt')

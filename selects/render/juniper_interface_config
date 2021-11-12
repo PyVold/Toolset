@@ -1,14 +1,13 @@
 {# list of dictionaries #}
 
-{% for interface in interface_list %}
+{%- for interface in interface_list %}
 
 edit interface {{ interface.name }}
-{% if interface.vlan == 10 %}
+{%- if interface.vlan == 10 %}
 set unit 0 family ethernet-switching port-mode access vlan members 10
-{% else %}
+{%- else %}
 set unit 0 family ethernet-switching port-mode access vlan members 20
-{% endif %}
+{%- endif %}
 set description {{ interface.desc }}
 top
-
 {% endfor %}

@@ -1,0 +1,7 @@
+interface_list:
+ - name: inet0
+   vlan: 10
+   desc: test interface
+ - name: inet1
+   vlan: 20
+   desc: test interface 2

@@ -1,0 +1,3 @@
+local_asn: 27001
+bgp_neighbor: 1.1.1.1
+remote_asn: 27002

@@ -1,0 +1,21 @@
+---
+routers:
+  - router: R1
+    reflector:
+      description: twamp_light_for_router1
+      twamp_description:  # Optional Description
+      prefixes:
+        - source: 10.1.1.1/23
+          description: prefix description 1
+        - source: 20.1.1.1/42
+          description: prefix description 2
+    sessions:
+      - name: session_1
+        description: session between R1 and R2
+        source: 10.10.1.1
+        destination: 10.10.1.2
+      - name: session_2
+        description: session between R1 and R3
+        source: 20.20.1.1
+        destination: 20.20.1.2
+...
