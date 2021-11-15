@@ -1,9 +1,11 @@
 import logging, os
 from datetime import date
 
+dir = os.path.dirname(__file__)
+
 def call_logger():
-    logger_uses = setup_logger('logger_uses', 'logs/{}/uses.log'.format(date.today()))
-    logger_visits = setup_logger('logger_visits', 'logs/{}/visits.log'.format(date.today()))
+    logger_uses = setup_logger('logger_uses', os.path.join(dir, 'logs/{}/uses.log'.format(date.today())))
+    logger_visits = setup_logger('logger_visits', os.path.join(dir, 'logs/{}/visits.log'.format(date.today())))
 
 def setup_logger(name, log_file, level=logging.INFO):
     """To setup as many loggers as you want"""
